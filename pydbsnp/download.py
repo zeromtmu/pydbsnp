@@ -54,7 +54,7 @@ def main():
     )
     print(
         'Downloading dbSNP data in VCF format '
-        f'({args.reference_buiod} coordinates) '
+        f'({args.reference_build} coordinates) '
         '(this will probably take a few minutes)'
     )
     ftp = FTP(FTP_HOST)
