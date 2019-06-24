@@ -70,4 +70,4 @@ def main():
             f'RETR {BUILD_TO_FILENAME[args.reference_build]}.tbi', f.write
         )
     ftp.quit()
-    print('Download complete.')
+    print(f'Download complete, files saved in {os.path.dirname(dest)}')
