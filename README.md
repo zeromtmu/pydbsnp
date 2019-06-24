@@ -1,4 +1,4 @@
-# accelasc
+# pydbsnp
 
 Interface with dbSNP VCF data
 
