@@ -54,7 +54,7 @@ def main():
     )
     print(
         'Downloading dbSNP data in VCF format '
-        f'({args.reference_build} coordinates) '
+        f'({args.reference_build} coordinates) to {os.path.dirname(dest)}'
         '(this will probably take a few minutes)'
     )
     ftp = FTP(FTP_HOST)
@@ -64,10 +64,10 @@ def main():
         ftp.retrbinary(
             f'RETR {BUILD_TO_FILENAME[args.reference_build]}', f.write
         )
-    print('Downloading tabix index')
+    print(f'Downloading tabix index to {os.path.dirname(dest)}.tbi')
     with open(f'{dest}.tbi', 'wb') as f:
         ftp.retrbinary(
             f'RETR {BUILD_TO_FILENAME[args.reference_build]}.tbi', f.write
         )
     ftp.quit()
-    print(f'Download complete, files saved in {os.path.dirname(dest)}')
+    print(f'Download complete')
