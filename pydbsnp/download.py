@@ -52,6 +52,11 @@ def main():
         f'PYDBSNP_VCF_{BUILD_TO_INT[args.reference_build]}',
         os.path.join(VCF_DIR_DEFAULT, BUILD_TO_FILENAME[args.reference_build])
     )
+    print(
+        'Downloading dbSNP data in VCF format '
+        f'({args.reference_buiod} coordinates) '
+        '(this will probably take a few minutes)'
+    )
     ftp = FTP(FTP_HOST)
     ftp.login()
     ftp.cwd(FTP_DIR)
@@ -59,8 +64,10 @@ def main():
         ftp.retrbinary(
             f'RETR {BUILD_TO_FILENAME[args.reference_build]}', f.write
         )
+    print('Downloading tabix index')
     with open(f'{dest}.tbi', 'wb') as f:
         ftp.retrbinary(
             f'RETR {BUILD_TO_FILENAME[args.reference_build]}.tbi', f.write
         )
     ftp.quit()
+    print('Download complete.')
