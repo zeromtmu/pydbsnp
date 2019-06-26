@@ -15,7 +15,7 @@ from argparse import ArgumentParser
 from functools import partial
 from multiprocessing import Pool
 
-from pydbsnp.env import VCF_GRCH37, VCF_GRCH38, BED_GRCH37, BED_GRCH38
+from pydbsnp.env import VCF_GRCH37, VCF_GRCH38, RSID_GRCH37, RSID_GRCH38
 
 
 
@@ -24,7 +24,7 @@ from pydbsnp.env import VCF_GRCH37, VCF_GRCH38, BED_GRCH37, BED_GRCH38
 
 def reformat_sort(
     input_vcf_path,
-    output_bed_path,
+    output_rsid_path,
     quiet=False,
     temp_dir=None
 ):
@@ -32,9 +32,9 @@ def reformat_sort(
         print(
             f'Reformatting database {input_vcf_path} and sorting by RSID. '
             'This will take a while. Reformatted and sorted data will be '
-            f'written to {output_bed_path}.'
+            f'written to {output_RSID_path}.'
         )
-    with open(output_bed_path, 'wb') as f:
+    with open(output_RSID_path, 'wb') as f:
         with subprocess.Popen(
             ('zcat', input_vcf_path), stdout=subprocess.PIPE
         ) as zcat:
@@ -54,7 +54,7 @@ def reformat_sort(
                         'sort',
                         '-k3,3',
                         '-n',
-                        '-T', temp_dir or os.path.dirname(output_bed_path)
+                        '-T', temp_dir or os.path.dirname(output_RSID_path)
                     ),
                     stdin=awk.stdout,
                     stdout=subprocess.PIPE
@@ -66,34 +66,34 @@ def reformat_sort(
                     )
                 
 
-def index(bed_file_path, quiet=False):
+def index(rsid_file_path, quiet=False):
     if not quiet:
-        print(f'Indexing {bed_file_path}.')
+        print(f'Indexing {rsid_file_path}.')
     subprocess.run(
         (
             'tabix',
             '--csi',
             '--sequence', '1',
             '--begin', '2',
-            '--end', '3', 
-            bed_file_path
+            '--end', '2', 
+            rsid_file_path
         )
     )
 
 
 def reformat_sort_index(
     input_vcf_path,
-    output_bed_path,
+    output_rsid_path,
     quiet=False,
     temp_dir=None
 ):
     reformat_sort(
         input_vcf_path,
-        output_bed_path,
+        output_rsid_path,
         quiet=quiet,
         temp_dir=temp_dir
     )
-    index(output_bed_path, quiet=False)
+    index(output_rsid_path, quiet=False)
     
 
 def parse_arguments():
@@ -129,7 +129,7 @@ def main():
             (
                 (vcf, bed)
                 for vcf, bed
-                in ((VCF_GRCH37, VCF_GRCH38), (BED_GRCH37, BED_GRCH38))
+                in ((VCF_GRCH37, VCF_GRCH38), (RSID_GRCH37, RSID_GRCH38))
                 if os.path.isfile(vcf)
             )
         )

@@ -31,11 +31,11 @@ BUILD_TO_VCF = {
     'hg19': VCF_GRCH37, 'GRCh37': VCF_GRCH37,
     'hg38': VCF_GRCH38, 'GRCh38': VCF_GRCH38
 }
-BED_GRCH37 = os.environ.get(
-    'PYDBSNP_BED_GRCH37', 
-    os.path.join(os.path.dirname(__file__), 'GCF_000001405.25.bed.bgz')
+RSID_GRCH37 = os.environ.get(
+    'PYDBSNP_RSID_GRCH37', 
+    os.path.join(os.path.dirname(__file__), 'GCF_000001405.25.rsid.bgz')
 )
-BED_GRCH38 = os.environ.get(
-    'PYDBSNP_BED_GRCH38', 
-    os.path.join(os.path.dirname(__file__), 'GCF_000001405.38.bed.bgz')
+RSID_GRCH38 = os.environ.get(
+    'PYDBSNP_RSID_GRCH38', 
+    os.path.join(os.path.dirname(__file__), 'GCF_000001405.38.rsid.bgz')
 )
