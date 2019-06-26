@@ -8,14 +8,10 @@
 
 # Imports ======================================================================
 
-import argparse
-import gzip
-import os
 import os.path
-import pysam
 import subprocess
-import tempfile
 
+from argparse import ArgumentParser
 from functools import partial
 from multiprocessing import Pool
 
@@ -101,9 +97,7 @@ def reformat_sort_index(
     
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description='index dbSNP VCF data by rsid'
-    )
+    parser = ArgumentParser(description='index dbSNP VCF data by rsid')
     parser.add_argument(
         '--quiet',
         action='store_true',

@@ -8,10 +8,10 @@
 
 # Imports ======================================================================
 
-import argparse
 import os
 import os.path
 
+from argparse import ArgumentParser
 from ftplib import FTP
 
 from pydbsnp.env import FTP_BASENAME_GRCH37, FTP_BASENAME_GRCH38, BUILD_TO_VCF
@@ -61,7 +61,7 @@ def download(reference_build='GRCh38', quiet=False):
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='download dbSNP VCF data')
+    parser = ArgumentParser(description='download dbSNP VCF data')
     parser.add_argument(
         '--reference-build',
         choices=('hg19', 'GRCh37', 'hg38', 'GRCh38'),
