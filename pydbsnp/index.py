@@ -21,6 +21,9 @@ from multiprocessing import Pool
 
 from pydbsnp.env import VCF_GRCH37, VCF_GRCH38, BED_GRCH37, BED_GRCH38
 
+
+
+
 # Functions ====================================================================
 
 def reformat_sort(
