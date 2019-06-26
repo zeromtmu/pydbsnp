@@ -127,9 +127,9 @@ def main():
                 temp_dir=args.tmp_dir
             ),
             (
-                (vcf, bed)
-                for vcf, bed
-                in ((VCF_GRCH37, VCF_GRCH38), (RSID_GRCH37, RSID_GRCH38))
+                (vcf, rsid)
+                for vcf, rsid
+                in ((VCF_GRCH37, RSID_GRCH37), (VCF_GRCH38, RSID_GRCH38))
                 if os.path.isfile(vcf)
             )
         )
