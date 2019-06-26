@@ -43,7 +43,7 @@ def reformat_sort(
                     'awk', '-v', 'OFS=\t',
                     (
                         '!/##/ && !/#CHROM/ '
-                        '{sub(/rs/, "", $4); print "rs", $4 - 1, $4, $1, $3}'
+                        '{sub(/rs/, "", $4); print "rs", $4, $1, $3}'
                     ),
                 ),
                 stdin=zcat.stdout,
@@ -52,7 +52,7 @@ def reformat_sort(
                 with subprocess.Popen(
                     (
                         'sort',
-                        '-k3,3',
+                        '-k2,2',
                         '-n',
                         '-T', temp_dir or os.path.dirname(output_rsid_path)
                     ),
