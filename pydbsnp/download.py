@@ -36,8 +36,8 @@ def download(reference_build='GRCh38', quiet=False):
         print(
             'Downloading dbSNP data in VCF format '
             f'({reference_build} coordinates) to '
-            f'{BUILD_TO_VCF[reference_build]} '
-            '(this will probably take a few minutes)'
+            f'{BUILD_TO_VCF[reference_build]}. '
+            'This will probably take a few minutes.'
         )
     ftp = FTP(FTP_HOST)
     ftp.login()
@@ -47,14 +47,16 @@ def download(reference_build='GRCh38', quiet=False):
             f'RETR {BUILD_TO_FTP_BASENAME[reference_build]}', f.write
         )
     if not quiet:
-        print(f'Downloading tabix index to {BUILD_TO_VCF[reference_build]}.tbi')
+        print(
+            f'Downloading tabix index to {BUILD_TO_VCF[reference_build]}.tbi.'
+        )
     with open(f'{BUILD_TO_VCF[reference_build]}.tbi', 'wb') as f:
         ftp.retrbinary(
             f'RETR {BUILD_TO_FTP_BASENAME[reference_build]}.tbi', f.write
         )
     ftp.quit()
     if not quiet:
-        print(f'Download complete')
+        print(f'Download complete.')
 
 
 def parse_arguments():
