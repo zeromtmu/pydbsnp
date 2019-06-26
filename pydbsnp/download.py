@@ -36,7 +36,7 @@ def download(reference_build='GRCh38', quiet=False):
         print(
             'Downloading dbSNP data in VCF format '
             f'({reference_build} coordinates) to '
-            f'{BUILD_TO_VCF[reference_build]}'
+            f'{BUILD_TO_VCF[reference_build]} '
             '(this will probably take a few minutes)'
         )
     ftp = FTP(FTP_HOST)
