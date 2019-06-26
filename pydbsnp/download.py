@@ -8,9 +8,6 @@
 
 # Imports ======================================================================
 
-import os
-import os.path
-
 from argparse import ArgumentParser
 from ftplib import FTP
 
