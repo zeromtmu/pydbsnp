@@ -20,7 +20,10 @@ setuptools.setup(
     ],
     install_requires=['pysam'],
     entry_points={
-        'console_scripts': ['pydbsnp-download=pydbsnp.download:main',]
+        'console_scripts': [
+            'pydbsnp-download=pydbsnp.download:main',
+            'pydbsnp-index=pydbsnp.index:main'
+        ]
     },
     include_package_data=True
 )
