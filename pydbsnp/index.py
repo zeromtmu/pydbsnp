@@ -32,9 +32,9 @@ def reformat_sort(
         print(
             f'Reformatting database {input_vcf_path} and sorting by RSID. '
             'This will take a while. Reformatted and sorted data will be '
-            f'written to {output_RSID_path}.'
+            f'written to {output_rsid_path}.'
         )
-    with open(output_RSID_path, 'wb') as f:
+    with open(output_rsid_path, 'wb') as f:
         with subprocess.Popen(
             ('zcat', input_vcf_path), stdout=subprocess.PIPE
         ) as zcat:
@@ -54,7 +54,7 @@ def reformat_sort(
                         'sort',
                         '-k3,3',
                         '-n',
-                        '-T', temp_dir or os.path.dirname(output_RSID_path)
+                        '-T', temp_dir or os.path.dirname(output_rsid_path)
                     ),
                     stdin=awk.stdout,
                     stdout=subprocess.PIPE
