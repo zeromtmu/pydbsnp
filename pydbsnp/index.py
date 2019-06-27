@@ -43,7 +43,7 @@ def reformat_sort(
                     'awk', '-v', 'OFS=\t',
                     (
                         '!/##/ && !/#CHROM/ '
-                        '{sub(/rs/, "", $4); print "rs", $4, $1, $3}'
+                        '{sub(/rs/, "", $3); print "rs", $3, $1, $3}'
                     ),
                 ),
                 stdin=zcat.stdout,
