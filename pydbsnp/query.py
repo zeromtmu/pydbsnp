@@ -21,8 +21,8 @@ from pydbsnp.env import BUILD_TO_VCF, BUILD_TO_RSID
 
 # Constants ====================================================================
 
-RSID_REGEX = re.compile('rs[1-9][0-9]+$')
 COORD_REGEX = re.compile('.+:[0-9]+$')
+RSID_REGEX = re.compile('rs[1-9][0-9]+$')
 
 
 
