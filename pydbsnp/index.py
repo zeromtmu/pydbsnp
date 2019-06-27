@@ -31,8 +31,8 @@ def reformat_sort(
     if not quiet:
         print(
             f'Reformatting database {input_vcf_path} and sorting by RSID. '
-            'This will take a while. Reformatted and sorted data will be '
-            f'written to {output_rsid_path}.'
+            'This will probably take a couple of hours. Reformatted and sorted '
+            f'data will be written to {output_rsid_path}.'
         )
     with open(output_rsid_path, 'wb') as f:
         with subprocess.Popen(
