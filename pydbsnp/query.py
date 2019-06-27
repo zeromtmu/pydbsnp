@@ -53,7 +53,7 @@ def main():
     tbx = TabixFile(BUILD_TO_VCF[args.reference_build])
     for variant in args.variants:
         if COORD_REGEX.match(variant):
-            chrom, pos = id.split(':')
+            chrom, pos = variant.split(':')
             pos = int(pos)
             for row in tbx.fetch(chrom, pos, pos):
                 print(str(row))
