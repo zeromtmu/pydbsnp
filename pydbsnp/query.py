@@ -59,7 +59,7 @@ def main():
             for row in tbx.fetch(chrom, pos, pos):
                 print(str(row))
         elif RSID_REGEX.match(variant):
-            for coord in rsid_to_coordinates():
+            for coord in rsid_to_coordinates(variant):
         else:
             raise RuntimeError('Improperly formatted query')
     pass
