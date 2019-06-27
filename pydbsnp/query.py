@@ -26,8 +26,51 @@ RSID_REGEX = re.compile('rs[1-9][0-9]+$')
 
 
 
+# Classes ======================================================================
+
+class Variant():
+
+    def __init__(
+        self,
+        chrom=None,
+        pos=None,
+        id=None,
+        reference_build='GRCh38'
+    ):
+        if chrom and pos and not id:
+            self.chrom, self.pos = (chrom,), (pos,)
+        elif id and not (chrom or pos):
+            rs_number = int(id.replace('rs', ''))
+            self.chrom, self.pos = zip(
+                *(
+                    row.split()[2:]
+                    for row in TabixFile(BUILD_TO_RSID[reference_build]).fetch(
+                        'rs', rs_number - 1, rs_number
+                    )
+                )
+            )
+        
+        _, _, self.id, self.ref, self.alt, _, _, self.info = zip(
+            *(
+                row.split()
+                for chrom, pos in zip(self.chrom, self.pos)
+                for row in TabixFile(BUILD_TO_VCF[reference_build]).fetch(
+                    chrom, pos - 1, pos
+                )
+            )
+        )
+        self.id = self.id[0]
+
+
+
 
 # Functions ====================================================================
+
+def rsid_to_coordinates(rsid, rsid_file):
+    rs_number = int(rsid.replace('rs', ''))
+    for row in rsid_file.fetch('rs', rs_number - 1, rs_number):
+        chrom, pos = row.split()[2:]
+        yield chrom, int(pos)
 
 def parse_arguments():
     parser = ArgumentParser(description='query dbSNP VCF data')
@@ -55,11 +98,6 @@ def main():
         BUILD_TO_RSID[args.reference_build],
         index=f'{BUILD_TO_RSID[args.reference_build]}.csi'
     )
-    def rsid_to_coordinates(rsid):
-        rs_number = int(rsid.replace('rs', ''))
-        for row in rsid_file.fetch('rs', rs_number - 1, rs_number):
-            chrom, pos = row.split()[2:4]
-            yield chrom, int(pos)
     for variant in args.variants:
         if COORD_REGEX.match(variant):
             chrom, pos = variant.split(':')
@@ -67,7 +105,7 @@ def main():
             for row in vcf_file.fetch(chrom, pos - 1, pos):
                 print(row)
         elif RSID_REGEX.match(variant):
-            for chrom, pos in rsid_to_coordinates(variant):
+            for chrom, pos in rsid_to_coordinates(variant, rsid_file):
                 for row in vcf_file.fetch(chrom, pos - 1, pos):
                     print(row)
         else:
