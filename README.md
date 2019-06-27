@@ -27,3 +27,14 @@ For hg19/GRCh37 coordinates:
 pydbsnp-download --reference-build GRCh37
 pydbsnp-index
 ```
+
+## Command line usage
+
+```sh
+pydbsnp-query -h
+```
+
+```sh
+pydbsnp-query rs689
+pydbsnp-query --reference-build GRCh37 rs689
+```

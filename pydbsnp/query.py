@@ -9,10 +9,10 @@
 
 # Imports ======================================================================
 
-import pysam
 import re
 
 from argparse import ArgumentParser
+from pysam import TabixFile, VariantFile
 
 from pydbsnp.env import BUILD_TO_VCF, BUILD_TO_RSID
 
@@ -48,11 +48,17 @@ def parse_arguments():
 
 
 def main():
+    args = parse_arguments()
+    variant_file = VariantFile(BUILD_TO_VCF[args.reference_build])
+    print(variant_file.header)
     for variant in args.variants:
-        if RSID_REGEX.match(variant):
-            query_by_rsid(variant)
-        elif COORD_REGEX.match(variant):
-            query_by_coord(variant)
+        if COORD_REGEX.match(variant):
+            chrom, pos = id.split(':')
+            pos = int(pos)
+            tbx = TabixFile(BUILD_TO_VCF[args.reference_build])
+            for row in tbx.fetch(chrom, pos, pos):
+                print(str(row))
+        elif RSID_REGEX.match(variant):
         else:
             raise RuntimeError('Improperly formatted query')
     pass
