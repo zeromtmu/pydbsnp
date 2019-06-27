@@ -26,9 +26,10 @@ RSID_REGEX = re.compile('rs[1-9][0-9]+$')
 
 
 
+
 # Classes ======================================================================
 
-class Variant():
+class GeneralizedVariant():
 
     def __init__(
         self,
@@ -60,6 +61,27 @@ class Variant():
             )
         )
         self.id = self.id[0]
+
+
+class Variant(GeneralizedVariant):
+    
+    def __init__(
+        self,
+        chrom=None,
+        pos=None,
+        id=None,
+        reference_build='GRCh38'
+    ):
+        super().__init__(
+            chrom=chrom,
+            pos=pos,
+            id=id,
+            reference_build=reference_build
+        )
+        for field in (
+            self.chrom, self.pos, self.id, self.ref, self.alt, self.info
+        ):
+            field = field[0]
 
 
 
