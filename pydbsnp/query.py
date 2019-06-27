@@ -54,7 +54,7 @@ def main():
     rsid = TabixFile(BUILD_TO_RSID[args.reference_build])
     def rsid_to_coordinates(rsid):
         rs_number = rsid.replace('rs', '')
-        for row in rsid.fetch('rs', rs_number)
+        for row in rsid.fetch('rs', rs_number):
             yield row[2], int(row[3])
     for variant in args.variants:
         if COORD_REGEX.match(variant):
