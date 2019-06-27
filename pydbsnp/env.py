@@ -39,3 +39,7 @@ RSID_GRCH38 = os.environ.get(
     'PYDBSNP_RSID_GRCH38', 
     os.path.join(os.path.dirname(__file__), 'GCF_000001405.38.rsid.bgz')
 )
+BUILD_TO_RSID = {
+    'hg19': RSID_GRCH37, 'GRCh37': RSID_GRCH37,
+    'hg38': RSID_GRCH38, 'GRCh38': RSID_GRCH38
+}
