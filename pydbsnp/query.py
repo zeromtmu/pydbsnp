@@ -29,8 +29,6 @@ COORD_REGEX = re.compile('.+:[0-9]+$')
 
 # Functions ====================================================================
 
-def rsid_to_coordinates
-
 def parse_arguments():
     parser = ArgumentParser(description='query dbSNP VCF data')
     parser.add_argument(
