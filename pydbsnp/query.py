@@ -49,17 +49,17 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    variant_file = VariantFile(BUILD_TO_VCF[args.reference_build])
-    print(variant_file.header)
+    print(VariantFile(BUILD_TO_VCF[args.reference_build]).header)
+    tbx = TabixFile(BUILD_TO_VCF[args.reference_build])
     for variant in args.variants:
         if COORD_REGEX.match(variant):
             chrom, pos = id.split(':')
             pos = int(pos)
-            tbx = TabixFile(BUILD_TO_VCF[args.reference_build])
             for row in tbx.fetch(chrom, pos, pos):
                 print(str(row))
         elif RSID_REGEX.match(variant):
-            for coord in rsid_to_coordinates(variant):
+            for chrom, pos in rsid_to_coordinates(variant):
+                for row in tbx.fetch(chrom, pos, pos):
+                    print(str(row))
         else:
             raise RuntimeError('Improperly formatted query')
-    pass
