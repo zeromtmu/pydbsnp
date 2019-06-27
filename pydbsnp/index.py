@@ -105,6 +105,7 @@ def parse_arguments():
     )
     parser.add_argument(
         '--processes',
+        type=int,
         choices=(1, 2),
         default=1,
         help='set to 2 to index GRCh37 and GRCh38 data in parallel'
