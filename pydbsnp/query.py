@@ -57,17 +57,18 @@ def main():
     )
     def rsid_to_coordinates(rsid, variant):
         rs_number = int(variant.replace('rs', ''))
-        for row in rsid.fetch('rs', rs_number, rs_number):
-            yield row[2], int(row[3])
+        for row in rsid.fetch('rs', rs_number - 1, rs_number):
+            chrom, pos = row.split()[2:4]
+            yield chrom, int(pos)
     for variant in args.variants:
         if COORD_REGEX.match(variant):
             chrom, pos = variant.split(':')
             pos = int(pos)
-            for row in vcf.fetch(chrom, pos, pos):
+            for row in vcf.fetch(chrom, pos - 1, pos):
                 print(str(row))
         elif RSID_REGEX.match(variant):
             for chrom, pos in rsid_to_coordinates(rsid, variant):
-                for row in vcf.fetch(chrom, pos, pos):
+                for row in vcf.fetch(chrom, pos - 1, pos):
                     print(str(row))
         else:
             raise RuntimeError('Improperly formatted query')
