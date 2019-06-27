@@ -23,7 +23,7 @@ setuptools.setup(
         'console_scripts': [
             'pydbsnp-download=pydbsnp.download:main',
             'pydbsnp-index=pydbsnp.index:main',
-            # 'pydbsnp-query=pydbsnp.query:main'
+            'pydbsnp-query=pydbsnp.query:main'
         ]
     },
     include_package_data=True
