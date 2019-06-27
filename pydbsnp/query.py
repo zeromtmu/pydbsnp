@@ -56,8 +56,8 @@ def main():
         index=f'{BUILD_TO_RSID[args.reference_build]}.csi'
     )
     def rsid_to_coordinates(rsid, variant):
-        rs_number = variant.replace('rs', '')
-        for row in rsid.fetch('rs', rs_number):
+        rs_number = int(variant.replace('rs', ''))
+        for row in rsid.fetch('rs', rs_number, rs_number):
             yield row[2], int(row[3])
     for variant in args.variants:
         if COORD_REGEX.match(variant):
