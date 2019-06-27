@@ -52,8 +52,8 @@ def main():
     print(VariantFile(BUILD_TO_VCF[args.reference_build]).header)
     vcf = TabixFile(BUILD_TO_VCF[args.reference_build])
     rsid = TabixFile(BUILD_TO_RSID[args.reference_build])
-    def rsid_to_coordinates(rsid):
-        rs_number = rsid.replace('rs', '')
+    def rsid_to_coordinates(rsid, variant):
+        rs_number = variant.replace('rs', '')
         for row in rsid.fetch('rs', rs_number):
             yield row[2], int(row[3])
     for variant in args.variants:
@@ -63,7 +63,7 @@ def main():
             for row in vcf.fetch(chrom, pos, pos):
                 print(str(row))
         elif RSID_REGEX.match(variant):
-            for chrom, pos in rsid_to_coordinates(variant):
+            for chrom, pos in rsid_to_coordinates(rsid, variant):
                 for row in vcf.fetch(chrom, pos, pos):
                     print(str(row))
         else:
