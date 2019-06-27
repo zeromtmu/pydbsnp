@@ -10,6 +10,7 @@
 # Imports ======================================================================
 
 import re
+import subprocess
 
 from argparse import ArgumentParser
 from pysam import TabixFile, VariantFile
@@ -28,6 +29,20 @@ RSID_REGEX = re.compile('rs[1-9][0-9]+$')
 
 
 # Functions ====================================================================
+
+def rsid_to_coordinates(rsid, reference_build='GRCh38'):
+    rs_number = rsid.replace('rs', '')
+    with subprocess.Popen(
+        (
+            'tabix',
+            BUILD_TO_RSID[reference_build],
+            f'rs:{rs_number}-{rs_number}'
+        ),
+        stdout=subprocess.PIPE
+    ) as tabix:
+        for line in tabix.communicate()[0].decode().splitlines():
+            yield line.split()[2:]
+
 
 def parse_arguments():
     parser = ArgumentParser(description='query dbSNP VCF data')
@@ -51,11 +66,6 @@ def main():
     args = parse_arguments()
     print(VariantFile(BUILD_TO_VCF[args.reference_build]).header)
     vcf = TabixFile(BUILD_TO_VCF[args.reference_build])
-    rsid = TabixFile(BUILD_TO_RSID[args.reference_build])
-    def rsid_to_coordinates(rsid, variant):
-        rs_number = variant.replace('rs', '')
-        for row in rsid.fetch('rs', rs_number):
-            yield row[2], int(row[3])
     for variant in args.variants:
         if COORD_REGEX.match(variant):
             chrom, pos = variant.split(':')
@@ -63,7 +73,10 @@ def main():
             for row in vcf.fetch(chrom, pos, pos):
                 print(str(row))
         elif RSID_REGEX.match(variant):
-            for chrom, pos in rsid_to_coordinates(rsid, variant):
+            for chrom, pos in rsid_to_coordinates(
+                variant,
+                reference_build=args.reference_build
+            ):
                 for row in vcf.fetch(chrom, pos, pos):
                     print(str(row))
         else:
