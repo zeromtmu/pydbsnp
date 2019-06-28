@@ -36,6 +36,7 @@ pydbsnp-query -h
 
 ```sh
 pydbsnp-query rs689
+pydbsnp-query chr11:2160994
 pydbsnp-query --reference-build GRCh37 rs689
 ```
 

@@ -310,6 +310,7 @@ def main():
     for variant in args.variants:
         if COORD_REGEX.match(variant):
             chrom, pos = variant.split(':')
+            chrom = chrom_to_hgvs(chrom, reference_build=args.reference_build)
             pos = int(pos)
             for row in vcf_file.fetch(chrom, pos - 1, pos):
                 print(row)
