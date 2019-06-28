@@ -23,7 +23,7 @@ from pydbsnp.env import BUILD_TO_VCF, BUILD_TO_RSID
 
 COORD_REGEX = re.compile('.+:[0-9]+$')
 RSID_REGEX = re.compile('rs[1-9][0-9]+$')
-HGVS_REGEX = re.compile(r'N._[0-9]{n}\.[0-9]+$')
+HGVS_REGEX = re.compile(r'N._[0-9]{6}\.[0-9]+$')
 
 CHROM_TO_HGVS = {
     'GRCh37': {
