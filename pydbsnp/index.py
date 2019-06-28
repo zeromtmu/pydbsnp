@@ -120,6 +120,14 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
+    for path in RSID_GRCH37, RSID_GRCH38:
+        if os.path.isfile(path):
+            decision = input(
+                f'A file already exists at {BUILD_TO_VCF[reference_build]}, do '
+                'you wamt to overwrite it? (y/N):'
+            )
+            if decision not in 'yY':
+                return
     with Pool(processes=args.processes) as pool:
         pool.starmap(
             partial(
