@@ -268,10 +268,10 @@ class Variant(GeneralizedVariant):
 # Functions ====================================================================
 
 def chrom_to_hgvs(chrom, reference_build='GRCh38'):
-    if HGVS_REGEX.match(chrom):
-        return chrom
-    elif chrom in CHROM_TO_HGVS[reference_build].keys():
+    if chrom in CHROM_TO_HGVS[reference_build].keys():
         return CHROM_TO_HGVS[reference_build][chrom]
+    elif HGVS_REGEX.match(chrom):
+        return chrom
     else:
         raise RuntimeError('invalid chromosome name')
 
