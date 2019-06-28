@@ -62,6 +62,9 @@ class GeneralizedVariant():
         )
         self.id = self.id[0]
 
+    def __repr__(self):
+        return f"GeneralizedVarant(id='{self.id}')"
+
 
 class Variant(GeneralizedVariant):
     
@@ -82,6 +85,9 @@ class Variant(GeneralizedVariant):
             self.chrom, self.pos, self.id, self.ref, self.alt, self.info
         ):
             field = field[0]
+
+    def __repr__(self):
+            return f"Varant(id='{self.id}')"
 
 
 
