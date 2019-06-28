@@ -43,15 +43,20 @@ pydbsnp-query --reference-build GRCh37 rs689
 
 Two classes are provided: `Variant` and `GeneralizedVariant`.
 
+An object of the `Variant` class has an attribute for each relevant field
+of the VCF.
 ```python
 from pydbsnp import Variant
-v = Variant('rs8056814')
+v = Variant(id='rs8056814')
 print(v.chrom, v.pos, v.id, v.ref, v.alt)
 print(v.info)
 help(Variant)
 ```
 
+An object of the `GeneralizedVariant` class is similar, but each attribute
+is a tuple which may have multiple items. For example, one RSID may map
+to two sets of coordinates.
 ```python
-gv = GeneralizedVariant('rs8056814')
-print(v.chrom, v.pos, v.id, v.ref, v.alt)
+gv = GeneralizedVariant(id='rs8056814')
+print(gv.chrom, gv.pos, gv.id, gv.ref, gv.alt)
 ```
