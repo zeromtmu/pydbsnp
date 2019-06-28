@@ -45,7 +45,10 @@ class GeneralizedVariant():
             self.chrom, self.pos = zip(
                 *(
                     row.split()[2:]
-                    for row in TabixFile(BUILD_TO_RSID[reference_build]).fetch(
+                    for row in TabixFile(
+                        BUILD_TO_RSID[reference_build],
+                        index=f'{BUILD_TO_RSID[reference_build]}.csi'
+                    ).fetch(
                         'rs', rs_number - 1, rs_number
                     )
                 )
