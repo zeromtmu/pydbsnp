@@ -40,7 +40,7 @@ def reformat_sort(
         ) as zcat:
             with subprocess.Popen(
                 (
-                    'awk', '-v', 'OFS=\t',
+                    'awk', '-v', r'OFS=\t',
                     (
                         '!/##/ && !/#CHROM/ '
                         '{sub(/rs/, "", $3); print "rs", $3, $1, $2}'
