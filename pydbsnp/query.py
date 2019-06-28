@@ -46,8 +46,8 @@ CHROM_TO_HGVS = {
         '6': 'NC_000006.11',
         6: 'NC_000006.11',
         'chr7': 'NC_000007.13',
-        'chr7': 'NC_000007.13',
         '7': 'NC_000007.13',
+        7: 'NC_000007.13',
         'chr8': 'NC_000008.10',
         '8': 'NC_000008.10',
         8: 'NC_000008.10',
@@ -125,8 +125,8 @@ CHROM_TO_HGVS = {
         '6': 'NC_000006.12',
         6: 'NC_000006.12',
         'chr7': 'NC_000007.14',
-        'chr7': 'NC_000007.14',
         '7': 'NC_000007.14',
+        7: 'NC_000007.14',
         'chr8': 'NC_000008.11',
         '8': 'NC_000008.1',
         8: 'NC_000008.11',
@@ -135,7 +135,7 @@ CHROM_TO_HGVS = {
         9: 'NC_000009.12',
         'chr10': 'NC_000010.11',
         '10': 'NC_000010.11',
-        10: 'NC_000010.11'
+        10: 'NC_000010.11',
         'chr11': 'NC_000011.10',
         '11': 'NC_000011.10',
         11: 'NC_000011.10',
@@ -185,6 +185,8 @@ CHROM_TO_HGVS = {
         25: 'NC_012920.1'
     }
 }
+CHROM_TO_HGVS['hg19'] = CHROM_TO_HGVS['GRCh37']
+CHROM_TO_HGVS['hg38'] = CHROM_TO_HGVS['GRCh38']
 
 
 
@@ -202,7 +204,10 @@ class GeneralizedVariant():
         reference_build='GRCh38'
     ):
         if chrom and pos and not id:
-            self.chrom, self.pos = (chrom,), (int(pos),)
+            self.chrom = (
+                chrom_to_hgvs(chrom, reference_build=reference_build),
+            )
+            self.pos = (int(pos),)
         elif id and not (chrom or pos):
             rs_number = int(id.replace('rs', ''))
             self.chrom, self.pos = zip(
