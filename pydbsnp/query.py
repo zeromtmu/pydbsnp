@@ -84,11 +84,13 @@ class Variant(GeneralizedVariant):
             id=id,
             reference_build=reference_build
         )
-        for field in (
-            self.chrom, self.pos, self.id, self.ref, self.alt, self.info
-        ):
-            field = field[0]
-
+        self.chrom = self.chrom[0]
+        self.pos = self.pos[0]
+        self.id = self.id[0]
+        self.ref = self.ref[0]
+        self.alt = self.alt[0]
+        self.info = self.info[0]
+    
     def __repr__(self):
             return f"Varant(id='{self.id}')"
 
