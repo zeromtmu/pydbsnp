@@ -39,7 +39,7 @@ class GeneralizedVariant():
         reference_build='GRCh38'
     ):
         if chrom and pos and not id:
-            self.chrom, self.pos = (chrom,), (pos,)
+            self.chrom, self.pos = (chrom,), (int(pos),)
         elif id and not (chrom or pos):
             rs_number = int(id.replace('rs', ''))
             self.chrom, self.pos = zip(
@@ -53,6 +53,7 @@ class GeneralizedVariant():
                     )
                 )
             )
+            self.pos = tuple(int(p) for p in self.pos)
         
         _, _, self.id, self.ref, self.alt, _, _, self.info = zip(
             *(
