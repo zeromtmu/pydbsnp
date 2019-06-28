@@ -38,3 +38,20 @@ pydbsnp-query -h
 pydbsnp-query rs689
 pydbsnp-query --reference-build GRCh37 rs689
 ```
+
+## API
+
+Two classes are provided: `Variant` and `GeneralizedVariant`.
+
+```python
+from pydbsnp import Variant
+v = Variant('rs8056814')
+print(v.chrom, v.pos, v.id, v.ref, v.alt)
+print(v.info)
+help(Variant)
+```
+
+```python
+gv = GeneralizedVariant('rs8056814')
+print(v.chrom, v.pos, v.id, v.ref, v.alt)
+```
