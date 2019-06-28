@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pydbsnp',
-    version='0.0.23',
+    version='0.0.24',
     author='Anthony Aylward',
     author_email='aaylward@eng.ucsd.edu',
     description='Interface with dbSNP VCF data',
