@@ -123,7 +123,7 @@ def main():
     for path in RSID_GRCH37, RSID_GRCH38:
         if os.path.isfile(path):
             decision = input(
-                f'A file already exists at {path}, do you wamt to overwrite '
+                f'A file already exists at {path}, do you want to overwrite '
                 'it? (y/N):'
             )
             if decision not in 'yY':
