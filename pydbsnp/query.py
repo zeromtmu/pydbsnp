@@ -60,10 +60,9 @@ class GeneralizedVariant():
                 )
             )
         )
-        self.id = self.id[0]
 
     def __repr__(self):
-        return f"GeneralizedVarant(id='{self.id}')"
+        return f"GeneralizedVarant(id='{self.id[0]}')"
 
 
 class Variant(GeneralizedVariant):
