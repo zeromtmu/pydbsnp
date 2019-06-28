@@ -51,6 +51,8 @@ from pydbsnp import Variant
 v = Variant(id='rs8056814')
 print(v.chrom, v.pos, v.id, v.ref, v.alt)
 print(v.info)
+w = Variant(id='rs8056814', reference_build='GRCh37')
+print(w.chrom, w.pos
 help(Variant)
 ```
 
