@@ -54,6 +54,8 @@ print(v.chrom, v.pos, v.id, v.ref, v.alt)
 print(v.info)
 w = Variant(id='rs8056814', reference_build='GRCh37')
 print(w.chrom, w.pos)
+x = Variant('chr16', 75218429)
+print(x)
 help(Variant)
 ```
 
