@@ -4,7 +4,27 @@ Interface with dbSNP VCF data
 
 ## Installation
 
-First install the python package via `pip3`
+**Step 0 (optional):** If you don't want to bother with environment variables
+and don't care about how `pydbsnp` works under the hood, skip this step.
+
+If you wish, you can determine the location where `pydbsnp` looks for relevant
+data using four environment variables: `PYDBSNP_VCF_GRCH37`,
+`PYDBSNP_RSID_GRCH37`, `PYDBSNP_VCF_GRCH38`, `PYDBSNP_RSID_GRCH38`. The `VCF`
+variables determine the location of the VCF data, the `RSID` variables
+determine the location of the rsid indices. For example, you could add this
+to your `.bash_profile`:
+
+```bash
+export PYDBSNP_VCF_GRCH37=<path of your choice>
+export PYDBSNP_RSID_GRCH37=<path of your choice>
+export PYDBSNP_VCF_GRCH38=<path of your choice>
+export PYDBSNP_RSID_GRCH38=<path of your choice>
+```
+
+If you set these variables before continuing to the next step, `pydbsnp` will
+use them to determine where it places downloaded VCF files and RSID indices.
+
+**Step 1:** install the python package via `pip3`
 
 ```sh
 pip3 install pydbsnp
@@ -14,7 +34,8 @@ or
 pip3 install --user pydbsnp
 ```
 
-Once the python package is installed, download and index the dbSBP VCF data:
+**Step 2:** Once the python package is installed, download and index the dbSBP
+VCF data:
 
 ```sh
 pydbsnp-download
@@ -35,9 +56,10 @@ pydbsnp-query -h
 ```
 
 ```sh
-pydbsnp-query rs689
-pydbsnp-query chr11:2160994
-pydbsnp-query --reference-build GRCh37 rs689
+pydbsnp-query rs231361
+pydbsnp-query chr8:118184783
+pydbsnp-query --reference-build GRCh37 rs231361
+pydbsnp-query rs231361 chr8:118184783 rs7903146
 ```
 
 ## API
@@ -52,7 +74,9 @@ v = Variant(id='rs8056814')
 print(v.chrom, v.pos, v.id, v.ref, v.alt)
 print(v.info)
 w = Variant(id='rs8056814', reference_build='GRCh37')
-print(w.chrom, w.pos
+print(w.chrom, w.pos)
+x = Variant('chr16', 75218429)
+print(x)
 help(Variant)
 ```
 

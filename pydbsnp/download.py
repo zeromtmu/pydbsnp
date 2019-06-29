@@ -8,6 +8,8 @@
 
 # Imports ======================================================================
 
+import os.path
+
 from argparse import ArgumentParser
 from ftplib import FTP
 
@@ -32,6 +34,14 @@ BUILD_TO_INT = {'hg19': 37, 'GRCh37':37, 'hg38': 38,'GRCh38': 38}
 # Functions ====================================================================
 
 def download(reference_build='GRCh38', quiet=False):
+    if os.path.isfile(BUILD_TO_VCF[reference_build]):
+        decision = input(
+            f'A file already exists at {BUILD_TO_VCF[reference_build]}, do '
+            'you want to overwrite it? (y/N):'
+        )
+        if decision not in 'yY':
+            return
+
     if not quiet:
         print(
             'Downloading dbSNP data in VCF format '
