@@ -21,6 +21,9 @@ export PYDBSNP_VCF_GRCH38=<path of your choice>
 export PYDBSNP_RSID_GRCH38=<path of your choice>
 ```
 
+If you set these variables before continuing to the next step, `pydbsnp` will
+use them to determine where it places downloaded VCF files and RSID indices.
+
 **Step 1:** install the python package via `pip3`
 
 ```sh
