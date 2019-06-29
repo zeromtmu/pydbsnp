@@ -25,6 +25,5 @@ setuptools.setup(
             'pydbsnp-index=pydbsnp.index:main',
             'pydbsnp-query=pydbsnp.query:main'
         ]
-    },
-    include_package_data=True
+    }
 )
