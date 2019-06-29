@@ -35,9 +35,10 @@ pydbsnp-query -h
 ```
 
 ```sh
-pydbsnp-query rs689
-pydbsnp-query chr11:2160994
-pydbsnp-query --reference-build GRCh37 rs689
+pydbsnp-query rs231361
+pydbsnp-query chr8:118184783
+pydbsnp-query --reference-build GRCh37 rs231361
+pydbsnp-query rs231361 chr8:118184783 rs7903146
 ```
 
 ## API
@@ -52,7 +53,7 @@ v = Variant(id='rs8056814')
 print(v.chrom, v.pos, v.id, v.ref, v.alt)
 print(v.info)
 w = Variant(id='rs8056814', reference_build='GRCh37')
-print(w.chrom, w.pos
+print(w.chrom, w.pos)
 help(Variant)
 ```
 

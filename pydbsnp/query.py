@@ -195,6 +195,42 @@ CHROM_TO_HGVS['hg38'] = CHROM_TO_HGVS['GRCh38']
 # Classes ======================================================================
 
 class GeneralizedVariant():
+    """Information about a variant. Input parameters should be either `chrom`
+    and `pos` or `id`.
+
+    Parameters
+    ----------
+    chrom
+        chromosome of the variant
+    pos
+        position of the variant
+    id
+        rsid of the variant
+    reference_build : str
+        reference build for coordinates
+    
+    Attributes
+    ----------
+    chrom : tuple
+        reference sequences including the variant
+    pos : tuple
+        position of the variant on each reference sequence
+    id : tuple
+        rsid of each record for the given coordinates
+    ref : tuple
+        reference alleles of the variant
+    alt : tuple
+        alternate alleles of the variant
+    info : tuple
+        info column from the dbSNP vcf
+    
+    Examples
+    --------
+    GeneralizedVariant('chr8', 118184783)
+    GeneralizedVariant(chrom='8', pos=118184783)
+    GeneralizedVariant(id='rs231361')
+    GeneralizedVariant(id='rs231361', reference_build='GRCh37')
+    """
 
     def __init__(
         self,
@@ -222,6 +258,8 @@ class GeneralizedVariant():
                 )
             )
             self.pos = tuple(int(p) for p in self.pos)
+        else:
+            print('Invalid input parameters')
         
         _, _, self.id, self.ref, self.alt, _, _, self.info = zip(
             *(
@@ -238,6 +276,42 @@ class GeneralizedVariant():
 
 
 class Variant(GeneralizedVariant):
+    """Information about a variant. Input parameters should be either `chrom`
+    and `pos` or `id`.
+
+    Parameters
+    ----------
+    chrom
+        chromosome of the variant
+    pos
+        position of the variant
+    id
+        rsid of the variant
+    reference_build : str
+        reference build for coordinates
+    
+    Attributes
+    ----------
+    chrom : str
+        chromosome identifier of the variant
+    pos : int
+        position of the variant
+    id : str
+        rsid of the variant
+    ref : str
+        reference allele of the variant
+    alt : str
+        alternate allele of the variant
+    info : str
+        info column from the dbSNP vcf
+    
+    Examples
+    --------
+    Variant('chr8', 118184783)
+    Variant(chrom='8', pos=118184783)
+    Variant(id='rs231361')
+    Variant(id='rs231361', reference_build='GRCh37')
+    """
     
     def __init__(
         self,
