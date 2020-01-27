@@ -272,7 +272,7 @@ class GeneralizedVariant():
         )
 
     def __repr__(self):
-        return f"GeneralizedVarant(id='{self.id[0]}')"
+        return f"GeneralizedVarant(id='{self.id[-1]}')"
 
 
 class Variant(GeneralizedVariant):
@@ -326,12 +326,12 @@ class Variant(GeneralizedVariant):
             id=id,
             reference_build=reference_build
         )
-        self.chrom = self.chrom[0]
-        self.pos = self.pos[0]
-        self.id = self.id[0]
-        self.ref = self.ref[0]
-        self.alt = self.alt[0]
-        self.info = self.info[0]
+        self.chrom = self.chrom[-1]
+        self.pos = self.pos[-1]
+        self.id = self.id[-1]
+        self.ref = self.ref[-1]
+        self.alt = self.alt[-1]
+        self.info = self.info[-1]
     
     def __repr__(self):
             return f"Varant(id='{self.id}')"
