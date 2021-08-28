@@ -27,11 +27,11 @@ use them to determine where it places downloaded VCF files and RSID indices.
 **Step 1:** install the python package via `pip3`
 
 ```sh
-pip3 install pydbsnp
+pip install pydbsnp
 ```
 or
 ```sh
-pip3 install --user pydbsnp
+pip install --user pydbsnp
 ```
 
 **Step 2:** Once the python package is installed, download and index the dbSBP
