@@ -18,7 +18,7 @@ import os.path
 # Constants ====================================================================
 
 FTP_BASENAME_GRCH37 = 'GCF_000001405.25.bgz'
-FTP_BASENAME_GRCH38 = 'GCF_000001405.38.bgz'
+FTP_BASENAME_GRCH38 = 'GCF_000001405.39.bgz'
 VCF_GRCH37 = os.environ.get(
     'PYDBSNP_VCF_GRCH37', 
     os.path.join(os.path.dirname(__file__), FTP_BASENAME_GRCH37)
@@ -37,7 +37,7 @@ RSID_GRCH37 = os.environ.get(
 )
 RSID_GRCH38 = os.environ.get(
     'PYDBSNP_RSID_GRCH38', 
-    os.path.join(os.path.dirname(__file__), 'GCF_000001405.38.rsid.bgz')
+    os.path.join(os.path.dirname(__file__), 'GCF_000001405.39.rsid.bgz')
 )
 BUILD_TO_RSID = {
     'hg19': RSID_GRCH37, 'GRCh37': RSID_GRCH37,
