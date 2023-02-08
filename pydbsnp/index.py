@@ -42,7 +42,7 @@ def reformat_sort(
                 (
                     'awk', '-v', r'OFS=\t',
                     (
-                        '!/##/ && !/#CHROM/ '
+                        '!/##/ && !/#CHROM/ && /^NC_/'
                         '{sub(/rs/, "", $3); print "rs", $3, $1, $2}'
                     ),
                 ),
